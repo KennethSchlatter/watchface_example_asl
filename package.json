@@ -24,12 +24,12 @@
                 },
                 {
                     "file": "fonts/8-BIT WONDER.TTF",
-                    "name": "ATE_BIT_14",
+                    "name": "ATE_BIT_24",
                     "type": "font"
                 },
                 {
                     "file": "fonts/8-BIT WONDER.TTF",
-                    "name": "ATE_BIT_24",
+                    "name": "ATE_BIT_14",
                     "type": "font"
                 }
             ]
@@ -37,7 +37,8 @@
         "sdkVersion": "3",
         "targetPlatforms": [
             "aplite",
-            "basalt"
+            "basalt",
+            "chalk"
         ],
         "uuid": "66a1e271-1c08-463c-ae5a-df468c62af9b",
         "watchapp": {

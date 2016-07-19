@@ -16,7 +16,7 @@ static void update_time() {
   static char buffer[] = "00:00";
 
   // format the way that the time text is going to be displayed
-strftime(buffer, sizeof("00:00"),"%I*%M", tick_time);
+strftime(buffer, sizeof("00:00"),"%I:%M", tick_time);
 
 
   // Display this time on the TextLayer
@@ -25,9 +25,12 @@ strftime(buffer, sizeof("00:00"),"%I*%M", tick_time);
 
 
 static void main_window_load(Window *window) {
+  // Get bounds
+  GRect bounds = layer_get_bounds(window_get_root_layer(s_main_window));
+  
   // Create GBitmap, then set to created BitmapLayer
   s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_VALOR);
-  s_background_layer = bitmap_layer_create(GRect(0, 0, 144, 180));
+  s_background_layer = bitmap_layer_create(bounds);
   bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
   layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_background_layer));
   
@@ -35,7 +38,11 @@ static void main_window_load(Window *window) {
   //s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_ATE_BIT_24));
 
   //time layer
-  s_time_layer = text_layer_create(GRect(15, 108, 120, 50));
+  #if defined(PBL_RECT)
+  s_time_layer = text_layer_create(GRect(12, 110, 120, 50));
+  #elif defined(PBL_ROUND)
+  s_time_layer = text_layer_create(GRect(30, 110, 120, 50));
+  #endif
   text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorWhite);
   text_layer_set_text(s_time_layer, "00:00");
